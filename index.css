@@ -1,0 +1,48 @@
+/* 設定全域樣式 */
+body {
+    font-family: Arial, sans-serif; /* 字體 */
+    background-color: #f0f0f0;
+    padding: 0;
+    margin: 0;
+    font-size: 5vw;
+}
+
+/* 宣告電腦版不支援 */
+#alertPcNoRwd {
+    display: none;
+}
+@media screen and (min-width:576px) {
+    #alertPcNoRwd {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-color: aqua;
+        width: 100vw;
+        height: 100vh;
+
+        display: flex;
+        justify-content: center; /* 水平置中 */
+        align-items: center; /* 垂直置中 */
+    }
+    #alertPcNoRwd > p {
+        text-align: center;
+        color: #d4b100;
+        font-size: 5vw;
+        font-weight: bold;
+    }
+}
+
+/* 標題樣式 */
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 1.5em;
+}
+
+/* 段落樣式 */
+p {
+    text-align: center;
+    color: #666;
+    font-size: 1em;
+}
