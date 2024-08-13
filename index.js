@@ -29,7 +29,7 @@ function autoSlide() {
 
 document.addEventListener('DOMContentLoaded', () => {
     showSlide(proxy.currentIndex); // 頁面加載完成後顯示當前幻燈片
-    setInterval(autoSlide, 5000); // 每5秒自動切換幻燈片
+    // setInterval(autoSlide, 5000); // 每5秒自動切換幻燈片
 
     let startX;
     let endX;
@@ -49,34 +49,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// 創建一個 Proxy 來監視 currentIndex 的變化
+const handler = {
+    set: function (obj, prop, value) {
+        obj[prop] = value; // 設置新值
+        updateMapTransform(value); // 更新地圖變換
+        console.log(value); // 輸出新值到控制台
+        return true;
+    }
+};
+const proxy = new Proxy({ currentIndex: currentIndex }, handler); // 創建 Proxy
+
 
 // 地圖
-document.addEventListener('DOMContentLoaded', function () {
-    const map = document.getElementById('map'); // 獲取地圖元素
-    const carouselItems = document.querySelectorAll('.carousel-item'); // 獲取所有幻燈片元素
+const map = document.getElementById('map'); // 獲取地圖元素
+const carouselItems = document.querySelectorAll('.carousel-item'); // 獲取所有幻燈片元素
 
-    function updateMapTransform(index) {
-        switch (index) {
-            case 0:
-                map.style.transform = 'scale(2) translate(-10%, -10%)'; // 根據索引更新地圖變換
-                break;
-            case 1:
-                map.style.transform = 'scale(2) translate(-50%, -10%)';
-                break;
-            case 2:
-                map.style.transform = 'scale(2) translate(-10%, -50%)';
-                break;
-        }
+function updateMapTransform(index) {
+    switch (index) {
+        case 0:
+            map.style.transform = 'scale(9) translate(39%, -7%)'; // 根據索引更新地圖放大及平移
+            break;
+        case 1:
+            map.style.transform = 'scale(9) translate(31%, -20%)';
+            break;
+        case 2:
+            map.style.transform = 'scale(9) translate(22%, -19%)';
+            break;
+        case 3:
+            map.style.transform = 'scale(9) translate(0%, 0%)';
+            break;
+        case 4:
+            map.style.transform = 'scale(9) translate(0%, 0%)';
+        break;
+        case 5:
+            map.style.transform = 'scale(9) translate(0%, 0%)';
+        break;
     }
-
-    // 創建一個 Proxy 來監視 currentIndex 的變化
-    const handler = {
-        set: function (obj, prop, value) {
-            obj[prop] = value; // 設置新值
-            updateMapTransform(value); // 更新地圖變換
-            console.log(value); // 輸出新值到控制台
-            return true;
-        }
-    };
-    const proxy = new Proxy({ currentIndex: currentIndex }, handler); // 創建 Proxy
-});
+}

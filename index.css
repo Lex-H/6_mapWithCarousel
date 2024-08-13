@@ -1,7 +1,7 @@
 /* 設定全域樣式 */
 body {
     font-family: Arial, sans-serif; /* 字體 */
-    background-color: #f0f0f0;
+    background-color: #deffc2;
     padding: 0;
     margin: 0;
     font-size: 5vw;
@@ -42,9 +42,11 @@ h1 {
 
 /* 段落樣式 */
 p {
-    text-align: center;
     color: #666;
     font-size: 1em;
+    /* 文字換行 */
+    word-wrap: break-word;
+    padding: 5vw;
 }
 
 /* 地圖 */
@@ -59,12 +61,15 @@ p {
     /* 隱藏超出外框的內容 */
     position: relative;
     /* 使子元素可以絕對定位 */
+    display: flex;
+    align-items: center;
+    /* 垂直置中 */
 }
 
 #map {
     position: absolute;
     /* 允許地圖進行平移和縮放 */
-    transition: transform 0.5s ease;
+    transition: transform 3s ease;
     /* 平滑過渡效果 */
     
     width: 80vw;
