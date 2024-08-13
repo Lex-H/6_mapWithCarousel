@@ -47,10 +47,29 @@ p {
     font-size: 1em;
 }
 
-#map {
+/* 地圖 */
+.map-container {
+    width: 80vw;
+    /* 外框的寬度 */
+    height: 80vw;
+    /* 外框的高度 */
     margin: 10vw 10vw;
+    /* 設定外邊界 */
+    overflow: hidden;
+    /* 隱藏超出外框的內容 */
+    position: relative;
+    /* 使子元素可以絕對定位 */
+}
+
+#map {
+    position: absolute;
+    /* 允許地圖進行平移和縮放 */
+    transition: transform 0.5s ease;
+    /* 平滑過渡效果 */
+    
     width: 80vw;
 }
+
 
 /* 輪播圖 */
 /* 設置輪播圖的容器 */
