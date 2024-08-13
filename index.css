@@ -47,6 +47,11 @@ p {
     font-size: 1em;
 }
 
+#map {
+    margin: 10vw 10vw;
+    width: 80vw;
+}
+
 /* 輪播圖 */
 /* 設置輪播圖的容器 */
 .carousel {
