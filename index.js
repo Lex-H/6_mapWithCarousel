@@ -1,32 +1,3 @@
-// 地圖
-document.addEventListener('DOMContentLoaded', function () {
-    const map = document.getElementById('map'); // 獲取地圖元素
-    const carousel = document.querySelector('.carousel'); // 獲取輪播圖容器
-
-    // 更新地圖的縮放和平移
-    function updateMapTransform(scale, x, y) {
-        map.style.transform = `scale(${scale}) translate(${x}%, ${y}%)`;
-    }
-
-    // 監聽輪播圖的變化
-    carousel.addEventListener('change', function (event) {
-        const currentImage = event.target.id; // 獲取當前顯示的圖片ID
-        switch (currentImage) {
-            case 'img1':
-                updateMapTransform(2, -10, -10); // 當顯示img1時，地圖放大2倍並平移到(10%, 10%)
-                break;
-            case 'img2':
-                updateMapTransform(2, -50, -10); // 當顯示img2時，地圖放大2倍並平移到(50%, 10%)
-                break;
-            case 'img3':
-                updateMapTransform(2, -10, -50); // 當顯示img3時，地圖放大2倍並平移到(10%, 50%)
-                break;
-        }
-    });
-});
-
-
-
 // --------------- 輪播圖 ---------------
 // 當前顯示的輪播項目索引
 let currentIndex = 0;
@@ -97,3 +68,45 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 // --------------- 輪播圖 End ---------------
+
+
+// 地圖
+document.addEventListener('DOMContentLoaded', function () {
+    const map = document.getElementById('map'); // 獲取地圖元素
+    const carouselItems = document.querySelectorAll('.carousel-item'); // 獲取所有輪播圖項目
+
+    // 更新地圖的縮放和平移
+    function updateMapTransform(index) {
+        switch (index) {
+            case 0:
+                map.style.transform = 'scale(2) translate(-10%, -10%)'; // 當顯示img1時，地圖放大2倍並平移到(10%, 10%)
+                break;
+            case 1:
+                map.style.transform = 'scale(2) translate(-50%, -10%)'; // 當顯示img2時，地圖放大2倍並平移到(50%, 10%)
+                break;
+            case 2:
+                map.style.transform = 'scale(2) translate(-10%, -50%)'; // 當顯示img3時，地圖放大2倍並平移到(10%, 50%)
+                break;
+        }
+    }
+
+    // // 監聽輪播圖的變化
+    // carouselItems.forEach((item, index) => {
+    //     item.addEventListener('click', function () {
+    //         updateMapTransform(index); // 根據點擊的項目更新地圖
+    //     });
+    // });
+
+    // 依照currentIndex平移到指定位置
+    // updateMapTransform(currentIndex);
+    // 監視 currentIndex 的變化
+    Object.defineProperty(window, 'currentIndex', {
+        set: function (value) {
+            this._currentIndex = value;
+            updateMapTransform(value);
+        },
+        get: function () {
+            return this._currentIndex;
+        }
+    });
+});
