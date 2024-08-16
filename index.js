@@ -121,6 +121,7 @@ let initialScale = 1;
 
 map.addEventListener('touchstart', (e) => {
     if (e.touches.length === 2) {
+        e.preventDefault(); // 防止默認行為，如滾動或放大網頁...
         initialDistance = Math.hypot(
             e.touches[0].pageX - e.touches[1].pageX,
             e.touches[0].pageY - e.touches[1].pageY
@@ -131,6 +132,7 @@ map.addEventListener('touchstart', (e) => {
 
 map.addEventListener('touchmove', (e) => {
     if (e.touches.length === 2) {
+        e.preventDefault(); // 防止默認行為，如滾動或放大網頁...
         const currentDistance = Math.hypot(
             e.touches[0].pageX - e.touches[1].pageX,
             e.touches[0].pageY - e.touches[1].pageY
@@ -148,6 +150,9 @@ let offsetY = 0;
 
 map.addEventListener('touchstart', (e) => {
     if (e.touches.length === 1) {
+        // 防止默認行為，如滾動或放大網頁...
+        e.preventDefault();
+        
         startX = e.touches[0].pageX - offsetX;
         startY = e.touches[0].pageY - offsetY;
     }
@@ -158,6 +163,9 @@ map.addEventListener('touchmove', (e) => {
     map.style.transition = 'none';
 
     if (e.touches.length === 1) {
+        // 防止默認行為，如滾動或放大網頁...
+        e.preventDefault();
+        
         offsetX = e.touches[0].pageX - startX;
         offsetY = e.touches[0].pageY - startY;
         // 取得map的變形矩陣，變形矩陣的第一個元素就是我要的scale值
