@@ -64,6 +64,7 @@ p {
     display: flex;
     align-items: center;
     /* 垂直置中 */
+    background-color: white;
 }
 
 #map {

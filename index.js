@@ -154,9 +154,22 @@ map.addEventListener('touchstart', (e) => {
 });
 
 map.addEventListener('touchmove', (e) => {
+    // 取消過渡效果
+    map.style.transition = 'none';
+
     if (e.touches.length === 1) {
         offsetX = e.touches[0].pageX - startX;
         offsetY = e.touches[0].pageY - startY;
-        map.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+        // 取得map的變形矩陣，變形矩陣的第一個元素就是我要的scale值
+        const transformMatrix = window.getComputedStyle(map).transform;
+        // 取得矩陣的第一個元素
+        const firstParameter = transformMatrix.match(/matrix\(([^,]+)/)[1];
+        // 縮放及平移map
+        map.style.transform = `scale(${firstParameter}) translate(${offsetX}px, ${offsetY}px)`;
     }
+
+    // 恢復過渡效果
+    setTimeout(() => {
+        map.style.transition = 'transform 2s ease';
+    }, 500);
 });
