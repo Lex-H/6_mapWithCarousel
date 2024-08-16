@@ -138,9 +138,19 @@ map.addEventListener('touchmove', (e) => {
             e.touches[0].pageY - e.touches[1].pageY
         );
         const scale = initialScale * (currentDistance / initialDistance);
-        map.style.transform = `scale(${scale})`;
+
+        // 找出原本的transform，使用.match()、正則表達式及三元運算符保留其他部分，只替換掉scale成新的scale
+        const transform = map.style.transform;
+        const scaleRegex = /scale\([^\)]+\)/;
+        const newTransform = transform.match(scaleRegex)
+            ? transform.replace(scaleRegex, `scale(${scale})`)
+            : `${transform} scale(${scale})`;
+        
+        // 將map.style.transform替換成新的
+        map.style.transform = newTransform;
     }
 });
+
 
 // 新增用手指移動的功能
 let startX = 0;
