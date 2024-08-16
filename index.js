@@ -29,7 +29,7 @@ function autoSlide() {
 
 document.addEventListener('DOMContentLoaded', () => {
     showSlide(proxy.currentIndex); // 頁面加載完成後顯示當前幻燈片
-    setInterval(autoSlide, 5000); // 每5秒自動切換幻燈片
+    // setInterval(autoSlide, 5000); // 每5秒自動切換幻燈片
 
     let startX;
     let endX;
@@ -65,26 +65,52 @@ const map = document.getElementById('map'); // 獲取地圖元素
 const carouselItems = document.querySelectorAll('.carousel-item'); // 獲取所有幻燈片元素
 
 function updateMapTransform(index) {
-    // 在每個case之前將地圖縮小回scale(1)
-    map.style.transform = 'scale(1)';
     switch (index) {
         case 0:
-            map.style.transform = 'scale(9) translate(39%, -7%)'; // 根據索引更新地圖放大及平移
+            // 先在原本位置縮小
+            map.style.transform = 'scale(3) translate(15%, -19%)';
+            setTimeout(() => {
+                // 根據索引更新地圖放大及平移
+                map.style.transform = 'scale(9) translate(37.5%, -9.5%)';
+            }, 2000);
             break;
         case 1:
-            map.style.transform = 'scale(9) translate(31%, -20%)';
+            map.style.transform = 'scale(3) translate(39%, -7%)';
+            setTimeout(() => {
+                map.style.transform = 'scale(9) translate(31%, -20%)';
+            }, 2000);            
             break;
         case 2:
-            map.style.transform = 'scale(9) translate(22%, -19%)';
+            // 先在原本位置縮小
+            map.style.transform = 'scale(3) translate(31%, -20%)';
+            setTimeout(() => {
+                // 根據索引更新地圖放大及平移
+                map.style.transform = 'scale(9) translate(22%, -19%)';
+            }, 2000);    
             break;
         case 3:
-            map.style.transform = 'scale(9) translate(19%, -27%)';
+            // 先在原本位置縮小
+            map.style.transform = 'scale(3) translate(22%, -19%)';
+            setTimeout(() => {
+                // 根據索引更新地圖放大及平移
+                map.style.transform = 'scale(15) translate(19%, -27%)';
+            }, 2000);
             break;
         case 4:
-            map.style.transform = 'scale(9) translate(22.5%, -20%)';
+            // 先在原本位置縮小
+            map.style.transform = 'scale(3) translate(19%, -27%)';
+            setTimeout(() => {
+                // 根據索引更新地圖放大及平移
+                map.style.transform = 'scale(15) translate(22.5%, -20%)';
+            }, 2000);
             break;
         case 5:
-            map.style.transform = 'scale(15) translate(15%, -19%)';
+            // 先在原本位置縮小
+            map.style.transform = 'scale(3) translate(22.5%, -20%)';
+            setTimeout(() => {
+                // 根據索引更新地圖放大及平移
+                map.style.transform = 'scale(15) translate(15%, -19%)';
+            }, 2000);
             break;
     }
 }
