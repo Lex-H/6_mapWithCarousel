@@ -77,13 +77,13 @@ function updateMapTransform(index) {
             map.style.transform = 'scale(9) translate(22%, -19%)';
             break;
         case 3:
-            map.style.transform = 'scale(9) translate(0%, 0%)';
+            map.style.transform = 'scale(9) translate(19%, -27%)';
             break;
         case 4:
-            map.style.transform = 'scale(9) translate(0%, 0%)';
+            map.style.transform = 'scale(9) translate(22.5%, -20%)';
         break;
         case 5:
-            map.style.transform = 'scale(9) translate(0%, 0%)';
+            map.style.transform = 'scale(15) translate(15%, -19%)';
         break;
     }
 }
