@@ -29,7 +29,7 @@ function autoSlide() {
 
 document.addEventListener('DOMContentLoaded', () => {
     showSlide(proxy.currentIndex); // 頁面加載完成後顯示當前幻燈片
-    // setInterval(autoSlide, 5000); // 每5秒自動切換幻燈片
+    setInterval(autoSlide, 5000); // 每5秒自動切換幻燈片
 
     let startX;
     let endX;
@@ -60,12 +60,13 @@ const handler = {
 };
 const proxy = new Proxy({ currentIndex: currentIndex }, handler); // 創建 Proxy
 
-
 // 地圖
 const map = document.getElementById('map'); // 獲取地圖元素
 const carouselItems = document.querySelectorAll('.carousel-item'); // 獲取所有幻燈片元素
 
 function updateMapTransform(index) {
+    // 在每個case之前將地圖縮小回scale(1)
+    map.style.transform = 'scale(1)';
     switch (index) {
         case 0:
             map.style.transform = 'scale(9) translate(39%, -7%)'; // 根據索引更新地圖放大及平移
@@ -81,9 +82,55 @@ function updateMapTransform(index) {
             break;
         case 4:
             map.style.transform = 'scale(9) translate(22.5%, -20%)';
-        break;
+            break;
         case 5:
             map.style.transform = 'scale(15) translate(15%, -19%)';
-        break;
+            break;
     }
 }
+
+// 新增用兩根手指放大縮小的功能
+let initialDistance = 0;
+let initialScale = 1;
+
+map.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 2) {
+        initialDistance = Math.hypot(
+            e.touches[0].pageX - e.touches[1].pageX,
+            e.touches[0].pageY - e.touches[1].pageY
+        );
+        initialScale = parseFloat(map.style.transform.replace('scale(', '').replace(')', '')) || 1;
+    }
+});
+
+map.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 2) {
+        const currentDistance = Math.hypot(
+            e.touches[0].pageX - e.touches[1].pageX,
+            e.touches[0].pageY - e.touches[1].pageY
+        );
+        const scale = initialScale * (currentDistance / initialDistance);
+        map.style.transform = `scale(${scale})`;
+    }
+});
+
+// 新增用手指移動的功能
+let startX = 0;
+let startY = 0;
+let offsetX = 0;
+let offsetY = 0;
+
+map.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+        startX = e.touches[0].pageX - offsetX;
+        startY = e.touches[0].pageY - offsetY;
+    }
+});
+
+map.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 1) {
+        offsetX = e.touches[0].pageX - startX;
+        offsetY = e.touches[0].pageY - startY;
+        map.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+    }
+});
